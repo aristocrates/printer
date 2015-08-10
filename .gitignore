@@ -1,0 +1,3 @@
+# ignore all save and lock files
+*~
+\#*\#
