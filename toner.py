@@ -27,20 +27,27 @@ def get(color, tree):
     '''
     return tree.xpath('//*[@id="SupplyGauge'+colormap[color]+'"]')[0].text_content()
 
-def check(color, tree):
+def check(color, threshold, tree):
     '''@return True if needs changing
     '''
     level = get(color, tree)
-    return int(level[:-1]) < 25
+    return int(level[:-1]) < threshold
 
+def check_all(tree, threshold=10):
+    '''@return tuple (action_needed, message)
+                     action_needed: boolean
+                     message: string
+    '''
+    ans = False
+    message = ""
+    check_list = ['black', 'cyan', 'magenta', 'yellow', 'fuser']
+    for i in check_list:
+        if (check(i, threshold, tree)):
+            ans = True
+            message += "%s needs changing (%s), " % (i, get(i, tree))
+    return (ans, message)
+        
 html_tree = tree(text())
-print('Black: ' + get('black', html_tree))
-print('Black needs changing: ' + str(check('black', html_tree)))
-print('Cyan: ' + get('cyan', html_tree))
-print('Cyan needs changing: ' + str(check('cyan', html_tree)))
-print('Magenta: ' + get('magenta', html_tree))
-print('Magenta needs changing: ' + str(check('magenta', html_tree)))
-print('Yellow: ' + get('yellow', html_tree))
-print('Yellow needs changing: ' + str(check('yellow', html_tree)))
-print('Fuser: ' + get('fuser', html_tree))
-print('Fuser needs changing: ' + str(check('fuser', html_tree)))
+result = check_all(html_tree, threshold=10)
+if result[0]:
+    print("Hi IMSS reps,\n\n%s\n\nLove,\nNickbot" % result[1])
