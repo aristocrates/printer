@@ -23,11 +23,24 @@ def tree(text):
 colormap = {'black':'0', 'cyan':'1', 'magenta':'2', 'yellow':'3', 'fuser':'4'}
 
 def get(color, tree):
+    '''@return the ink level left in the color
+    '''
     return tree.xpath('//*[@id="SupplyGauge'+colormap[color]+'"]')[0].text_content()
+
+def check(color, tree):
+    '''@return True if needs changing
+    '''
+    level = get(color, tree)
+    return int(level[:-1]) < 25
 
 html_tree = tree(text())
 print('Black: ' + get('black', html_tree))
+print('Black needs changing: ' + str(check('black', html_tree)))
 print('Cyan: ' + get('cyan', html_tree))
+print('Cyan needs changing: ' + str(check('cyan', html_tree)))
 print('Magenta: ' + get('magenta', html_tree))
+print('Magenta needs changing: ' + str(check('magenta', html_tree)))
 print('Yellow: ' + get('yellow', html_tree))
+print('Yellow needs changing: ' + str(check('yellow', html_tree)))
 print('Fuser: ' + get('fuser', html_tree))
+print('Fuser needs changing: ' + str(check('fuser', html_tree)))
