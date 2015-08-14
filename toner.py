@@ -12,6 +12,9 @@ def text():
     '''
     # for now verify is set to false because we are using a self signed
     # ssl certificate, remove when that is no longer the case
+    # also for now warnings are suppressed
+    import warnings
+    warnings.filterwarnings("ignore")
     page = requests.get('https://war.caltech.edu', verify=False)
     return page.text
 

@@ -1,0 +1,10 @@
+To do:
+------
+ * Add exception handling for connection issues, and output message for when
+ the printer is down telling IMSS to reboot it
+ * (not related to the code but related to the printer administration) set
+ an administrator password on the printer so random people can't mess with
+ the settings (since the printer is accessible from the entire internet)
+ * (also printer administration) when letsencrypt is working, we should use
+ an ssl certificate from them rather than the current garbage self signed
+ certificate
