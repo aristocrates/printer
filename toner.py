@@ -49,8 +49,19 @@ def check_all(tree, threshold=10):
             ans = True
             message += "%s needs changing (%s), " % (i, get(i, tree))
     return (ans, message)
+
+def status(tree):
+    '''@return a string of the status of all toner levels
+    '''
+    ans = "Ink levels:\n"
+    check_list = ['black', 'cyan', 'magenta', 'yellow', 'fuser']
+    for i in check_list:
+        ans += i + ": " + get(i, tree) + "\n"
+    return ans
         
 html_tree = tree(text())
 result = check_all(html_tree, threshold=10)
 if result[0]:
     print("Hi IMSS reps,\n\n%s\n\nLove,\nNickbot" % result[1])
+
+print(status(html_tree))

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "toner.py", line 62, in <module>
+      html_tree = tree(text())
+        File "toner.py", line 18, in text
+	    page = requests.get('https://war.caltech.edu', verify=False)
+	      File "/usr/lib64/python2.7/site-packages/requests/api.py", line 68, in get
+	          return request('get', url, **kwargs)
+		    File "/usr/lib64/python2.7/site-packages/requests/api.py", line 50, in request
+		        response = session.request(method=method, url=url, **kwargs)
+			  File "/usr/lib64/python2.7/site-packages/requests/sessions.py", line 464, in request
+			      resp = self.send(prep, **send_kwargs)
+			        File "/usr/lib64/python2.7/site-packages/requests/sessions.py", line 576, in send
+				    r = adapter.send(request, **kwargs)
+				      File "/usr/lib64/python2.7/site-packages/requests/adapters.py", line 415, in send
+				          raise ConnectionError(err, request=request)
+					  requests.exceptions.ConnectionError: ('Connection aborted.', error(110, 'Connection timed out'))
+					  
