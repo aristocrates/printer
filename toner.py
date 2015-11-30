@@ -3,7 +3,7 @@ Provided by the gdbimssreps
 @author Nicholas Meyer
 @date August 9, 2015
 '''
-
+import sys
 from lxml import html
 import requests
 
@@ -58,10 +58,22 @@ def status(tree):
     for i in check_list:
         ans += i + ": " + get(i, tree) + "\n"
     return ans
-        
-html_tree = tree(text())
-result = check_all(html_tree, threshold=10)
-if result[0]:
-    print("Hi IMSS reps,\n\n%s\n\nLove,\nNickbot" % result[1])
 
-print(status(html_tree))
+def usage():
+    '''@return a usage statement in string representation
+    '''
+    return "Usage: python toner.py [status|check] [threshold]"
+    
+if __name__ == "__main__":
+    # Usage: python toner.py [status|check] [threshold]
+    if (sys.argv[1] == "status" and len(sys.argv) >= 2) \
+       or (sys.argv[1] == "check" and len(sys.argv) >= 3):
+        html_tree = tree(text())
+        if sys.argv[1] == "status":
+            print(status(html_tree))
+        elif sys.argv[1] == "check":
+            result = check_all(html_tree, threshold=int(sys.argv[2]))
+            if result[0]:
+                print("Hi IMSS reps,\n\n%s\n\nLove,\nNickbot" % result[1])
+    else:
+        print(usage())
