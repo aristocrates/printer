@@ -66,8 +66,8 @@ def usage():
     
 if __name__ == "__main__":
     # Usage: python toner.py [status|check] [threshold]
-    if (sys.argv[1] == "status" and len(sys.argv) >= 2) \
-       or (sys.argv[1] == "check" and len(sys.argv) >= 3):
+    if (len(sys.argv) >= 2 and sys.argv[1] == "status") \
+       or (len(sys.argv) >= 3 and sys.argv[1] == "check"):
         try:
             html_tree = tree(text())
             if sys.argv[1] == "status":
